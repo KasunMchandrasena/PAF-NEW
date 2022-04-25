@@ -119,4 +119,44 @@ public String readPowercutSchedule() {
 	return output;
 	}
 
+
+public String updatePowercutSchedule(String mcode,String description, String area, String date, String time) {
+	
+	String output = "";
+	
+	try {
+		Connection con = connect();
+		
+		if (con == null)
+		{return  "Error while connecting to the database for updating.";}
+		
+		// create a prepared statement
+		String query = "  UPDATE powercutschedule SET description=?,area=?,date=?,time=? where mcode=?"  ;
+		
+		PreparedStatement preparedStmt = con.prepareStatement(query);
+		
+		 // binding values
+		  
+		 preparedStmt.setString(1, description); 
+		 preparedStmt.setString(2, area); 
+		 preparedStmt.setString(3, date);
+		 preparedStmt.setString(4, time);
+		 preparedStmt.setString(5, mcode);
+		 
+		 
+		// execute the statement
+		 
+		 preparedStmt.execute(); 
+		 con.close(); 
+		 output = "Updated successful"; 
+	}
+	catch (Exception e) {
+		 output = "Error while Update the Power cut Schedule."; 
+		 System.err.println(e.getMessage()); 
+	}
+	
+	return output;
+}
+
+
 }

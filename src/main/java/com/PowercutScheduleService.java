@@ -44,4 +44,25 @@ public class PowercutScheduleService {
 		 return output; 
 	 }
 	 
+	 @PUT
+	 @Path("/")
+	 @Consumes(MediaType.APPLICATION_JSON)
+	 @Produces(MediaType.TEXT_PLAIN)
+	 public String updatePowercutSchedule(String updatePowercutSchedule)
+	 {
+		 JsonObject updateCons = new JsonParser().parse(updatePowercutSchedule).getAsJsonObject();
+		 
+		 String mcode = updateCons.get("mcode").getAsString();
+		 String description = updateCons.get("description").getAsString();
+		 String area = updateCons.get("area").getAsString();
+		 String date = updateCons.get("date").getAsString();
+		 String time = updateCons.get("time").getAsString();
+
+		 
+		 String output = PowercutScheduleOb.updatePowercutSchedule(mcode, description, area, date, time);
+		 return output;
+	 }
+	 
+
+	 
 }
