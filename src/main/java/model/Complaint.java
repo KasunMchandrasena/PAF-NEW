@@ -165,36 +165,34 @@ public class Complaint {
 		
 	//Delete
 	public String deleteComplaint(String accountNo) {
-		String output = "";
+	String output = "";
 			
-			try {
-				Connection con = connect();
+		try {
+			Connection con = connect();
 				
-				if (con == null)
-				{return "Error while connecting to the database for deleting."; }
+			if (con == null)
+			{return "Error while connecting to the database for deleting."; }
 				
-				//create a prepared statement
-				String query = "delete from complaint where accountNo=?";
+			//create a prepared statement
+			String query = "delete from complaint where accountNo=?";
 				
-				PreparedStatement preparedStmt = con.prepareStatement(query);
+			PreparedStatement preparedStmt = con.prepareStatement(query);
 				
-				//binding values
-				preparedStmt.setString(1,accountNo);
+			//binding values
+			preparedStmt.setString(1,accountNo);
 				
-				//execute the statement
-				preparedStmt.execute();
-				con.close();
+			//execute the statement
+			preparedStmt.execute();
+			con.close();
 				
-				output = "Deleted successfully";
-				}
+			output = "Deleted successfully";
+			}
 			
-				catch (Exception e)
-				{
-				
+			catch (Exception e)
+			{
 				output = "Error while deleting the Power cut schedule.";
 				System.err.println(e.getMessage());
-				
-				}
+			}
 			
 			return output;
 			}
