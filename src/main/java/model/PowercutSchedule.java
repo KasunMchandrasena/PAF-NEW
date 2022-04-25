@@ -55,6 +55,7 @@ public String InsertPowercutSchedule(String mcode, String description, String ar
 	}
 	
 	catch (Exception e) {
+		
 		 output = "Error while inserting the Power Consumption."; 
 		 System.err.println(e.getMessage()); 
 	}
@@ -108,12 +109,14 @@ public String readPowercutSchedule() {
 			 // buttons
 			
 		 }
+		 
 		 con.close(); 
 		 // Complete the html table
 		 output += "</table>";
 	}
 	
 	catch(Exception e)
+	
 	{
 		 output = "Error while reading the customer."; 
 		 System.err.println(e.getMessage()); 
@@ -151,7 +154,7 @@ public String updatePowercutSchedule(String mcode,String description, String are
 		 
 		 preparedStmt.execute(); 
 		 con.close(); 
-		 output = "Updated successful"; 
+		 output = "Updated successfully"; 
 	}
 	
 	catch (Exception e) {
