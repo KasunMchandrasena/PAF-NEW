@@ -32,12 +32,13 @@ public String InsertPowercutSchedule(String mcode, String description, String ar
 		
 		// create a prepared statement
 		//column name
+		
 		String query = "  insert into powercutschedule (`mcode`,`description`,`area`,`date`,`time`)" + " values (?, ?, ?, ?, ?)";
 		
 		PreparedStatement preparedStmt = con.prepareStatement(query);
 		
 		 // binding values
-//		 preparedStmt.setInt(1, 0); 
+		
 		 preparedStmt.setString(1, mcode);
 		 preparedStmt.setString(2, description);
 		 preparedStmt.setString(3, area); 
@@ -158,9 +159,11 @@ public String updatePowercutSchedule(String mcode,String description, String are
 	return output;
 }
 
+
 //Delete
 public String deletePowercutSchedule(String mcode) {
 	String output = "";
+	
 	try {
 		Connection con = connect();
 		
@@ -183,8 +186,10 @@ public String deletePowercutSchedule(String mcode) {
 		}
 	catch (Exception e)
 		{
+		
 		output = "Error while deleting the Power cut schedule.";
 		System.err.println(e.getMessage());
+		
 		}
 	
 	return output;

@@ -23,7 +23,7 @@ public class PowercutScheduleService {
 	 @GET
 	 @Path("/") 
 	 @Produces(MediaType.TEXT_HTML) 
-	 public String readItems() 
+	 public String readPowercutSchedule() 
 	  { 
 		  return PowercutScheduleOb.readPowercutSchedule(); 
 	  }
@@ -43,6 +43,7 @@ public class PowercutScheduleService {
 		 String output = PowercutScheduleOb.InsertPowercutSchedule(mcode,description,area,date,time);
 		 return output; 
 	 }
+	 
 	 
 	 @PUT
 	 @Path("/")
@@ -69,13 +70,14 @@ public class PowercutScheduleService {
 	 @Consumes(MediaType.APPLICATION_JSON)
 	 @Produces(MediaType.TEXT_PLAIN)
 	 public String deletePowercutSchedule(String PowercutSchedule)
+	
 	 {
-	 JsonObject updateCons = new JsonParser().parse(PowercutSchedule).getAsJsonObject();
-
-	 String mcode = updateCons.get("mcode").getAsString();
-
-	 String output = PowercutScheduleOb.deletePowercutSchedule(mcode);
-	 return output;
+		 JsonObject updateCons = new JsonParser().parse(PowercutSchedule).getAsJsonObject();
+	
+		 String mcode = updateCons.get("mcode").getAsString();
+	
+		 String output = PowercutScheduleOb.deletePowercutSchedule(mcode);
+		 return output;
 
 
 
