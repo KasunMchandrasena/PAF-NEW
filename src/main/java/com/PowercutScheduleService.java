@@ -82,6 +82,6 @@ public class PowercutScheduleService {
 	
 		 String output = PowercutScheduleOb.deletePowercutSchedule(mcode);
 		 return output;
-
 	 }
+	 
 }

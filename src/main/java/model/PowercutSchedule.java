@@ -192,7 +192,6 @@ public String deletePowercutSchedule(String mcode) {
 		}
 	
 	catch (Exception e)
-	
 		{
 		
 		output = "Error while deleting the Power cut schedule.";
