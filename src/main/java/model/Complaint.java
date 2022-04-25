@@ -122,6 +122,47 @@ public class Complaint {
 		
 		return output;
 		}
+	
+		public String updateComplaint(String complaintCategory, String complaintType, String accountNo, String name, String mobileno,String address,String complaintDesc) 
+		{
+		 String output = "";
+		
+		try {
+			Connection con = connect();
+			
+			if (con == null)
+			{return  "Error while connecting to the database for updating.";}
+			
+			// create a prepared statement
+			String query = "  UPDATE complaint SET complaintCategory=?,complaintType=?,name=?,mobileno=?,address=?,complaintDesc=? where accountNo=?"  ;
+			
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			
+			 // binding values
+			  
+			 preparedStmt.setString(1, complaintCategory); 
+			 preparedStmt.setString(2, complaintType); 
+			 preparedStmt.setString(3, name);
+			 preparedStmt.setString(4, mobileno);
+			 preparedStmt.setString(5, address);
+			 preparedStmt.setString(6, complaintDesc);
+			 preparedStmt.setString(7, accountNo);
+			 
+			// execute the statement
+			 
+			 preparedStmt.execute(); 
+			 con.close(); 
+			 output = "Updated successful"; 
+		}
+		
+		catch (Exception e) {
+			 output = "Error while Update the complaint."; 
+			 System.err.println(e.getMessage()); 
+		}
+		
+		return output;
+	}
+
 
 	
 }

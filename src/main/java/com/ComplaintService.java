@@ -47,5 +47,27 @@ public class ComplaintService {
 		 String output = ComplaintOb.InsertComplaint(complaintCategory,complaintType,accountNo,name,mobileno,address,complaintDesc);
 		 return output; 
 	 }
+	 
+	 
+	 @PUT
+	 @Path("/")
+	 @Consumes(MediaType.APPLICATION_JSON)
+	 @Produces(MediaType.TEXT_PLAIN)
+	 public String updateComplaint(String updateComplaintData)
+	 {
+		 
+		 JsonObject updateCons = new JsonParser().parse(updateComplaintData).getAsJsonObject();
+		 
+		 String complaintCategory = updateCons.get("complaintCategory").getAsString();
+		 String complaintType = updateCons.get("complaintType").getAsString();
+		 String accountNo = updateCons.get("accountNo").getAsString();
+		 String name = updateCons.get("name").getAsString();
+		 String mobileno = updateCons.get("mobileno").getAsString();
+		 String address = updateCons.get("address").getAsString();
+		 String complaintDesc = updateCons.get("complaintDesc").getAsString();
+		 
+		 String output = ComplaintOb.updateComplaint(complaintCategory,complaintType,accountNo,name,mobileno,address,complaintDesc);
+		 return output;
+	 }
 
 }
