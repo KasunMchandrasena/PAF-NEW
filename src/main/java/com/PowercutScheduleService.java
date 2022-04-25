@@ -51,6 +51,7 @@ public class PowercutScheduleService {
 	 @Produces(MediaType.TEXT_PLAIN)
 	 public String updatePowercutSchedule(String updatePowercutSchedule)
 	 {
+		 
 		 JsonObject updateCons = new JsonParser().parse(updatePowercutSchedule).getAsJsonObject();
 		 
 		 String mcode = updateCons.get("mcode").getAsString();
@@ -78,8 +79,6 @@ public class PowercutScheduleService {
 	
 		 String output = PowercutScheduleOb.deletePowercutSchedule(mcode);
 		 return output;
-
-
 
 	 }
 }
