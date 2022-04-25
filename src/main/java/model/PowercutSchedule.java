@@ -154,7 +154,7 @@ public String updatePowercutSchedule(String mcode,String description, String are
 		 
 		 preparedStmt.execute(); 
 		 con.close(); 
-		 output = "Updated successful"; 
+		 output = "Updated successfully"; 
 	}
 	
 	catch (Exception e) {
