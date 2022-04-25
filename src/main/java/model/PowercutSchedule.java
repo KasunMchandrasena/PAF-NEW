@@ -32,12 +32,13 @@ public String InsertPowercutSchedule(String mcode, String description, String ar
 		
 		// create a prepared statement
 		//column name
+		
 		String query = "  insert into powercutschedule (`mcode`,`description`,`area`,`date`,`time`)" + " values (?, ?, ?, ?, ?)";
 		
 		PreparedStatement preparedStmt = con.prepareStatement(query);
 		
 		 // binding values
-//		 preparedStmt.setInt(1, 0); 
+		
 		 preparedStmt.setString(1, mcode);
 		 preparedStmt.setString(2, description);
 		 preparedStmt.setString(3, area); 
@@ -52,6 +53,7 @@ public String InsertPowercutSchedule(String mcode, String description, String ar
 		 con.close(); 
 		 output = "Inserted successfully"; 
 	}
+	
 	catch (Exception e) {
 		 output = "Error while inserting the Power Consumption."; 
 		 System.err.println(e.getMessage()); 
@@ -110,11 +112,89 @@ public String readPowercutSchedule() {
 		 // Complete the html table
 		 output += "</table>";
 	}
+	
 	catch(Exception e)
 	{
 		 output = "Error while reading the customer."; 
 		 System.err.println(e.getMessage()); 
 	}
+	
+	return output;
+	}
+
+
+public String updatePowercutSchedule(String mcode,String description, String area, String date, String time) {
+	
+	String output = "";
+	
+	try {
+		Connection con = connect();
+		
+		if (con == null)
+		{return  "Error while connecting to the database for updating.";}
+		
+		// create a prepared statement
+		String query = "  UPDATE powercutschedule SET description=?,area=?,date=?,time=? where mcode=?"  ;
+		
+		PreparedStatement preparedStmt = con.prepareStatement(query);
+		
+		 // binding values
+		  
+		 preparedStmt.setString(1, description); 
+		 preparedStmt.setString(2, area); 
+		 preparedStmt.setString(3, date);
+		 preparedStmt.setString(4, time);
+		 preparedStmt.setString(5, mcode);
+		 
+		 
+		// execute the statement
+		 
+		 preparedStmt.execute(); 
+		 con.close(); 
+		 output = "Updated successful"; 
+	}
+	
+	catch (Exception e) {
+		 output = "Error while Update the Power cut Schedule."; 
+		 System.err.println(e.getMessage()); 
+	}
+	
+	return output;
+}
+
+
+//Delete
+public String deletePowercutSchedule(String mcode) {
+	String output = "";
+	
+	try {
+		Connection con = connect();
+		
+		if (con == null)
+		{return "Error while connecting to the database for deleting."; }
+		
+		//create a prepared statement
+		String query = "delete from powercutschedule where mcode=?";
+		
+		PreparedStatement preparedStmt = con.prepareStatement(query);
+		
+		//binding values
+		preparedStmt.setString(1,mcode);
+		
+		//execute the statement
+		preparedStmt.execute();
+		con.close();
+		
+		output = "Deleted successfully";
+		}
+	
+	catch (Exception e)
+		{
+		
+		output = "Error while deleting the Power cut schedule.";
+		System.err.println(e.getMessage());
+		
+		}
 	
 	return output;
 	}
