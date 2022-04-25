@@ -63,6 +63,21 @@ public class PowercutScheduleService {
 		 return output;
 	 }
 	 
-
 	 
+	 @DELETE
+	 @Path("/")
+	 @Consumes(MediaType.APPLICATION_JSON)
+	 @Produces(MediaType.TEXT_PLAIN)
+	 public String deletePowercutSchedule(String PowercutSchedule)
+	 {
+	 JsonObject updateCons = new JsonParser().parse(PowercutSchedule).getAsJsonObject();
+
+	 String mcode = updateCons.get("mcode").getAsString();
+
+	 String output = PowercutScheduleOb.deletePowercutSchedule(mcode);
+	 return output;
+
+
+
+	 }
 }
