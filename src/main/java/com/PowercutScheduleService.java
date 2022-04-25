@@ -38,7 +38,8 @@ public class PowercutScheduleService {
 			 				@FormParam("area") String area,
 			 				@FormParam("date") String date,
 	 						@FormParam("time") String time)
-			 				
+		
+	 
 	 {
 		 String output = PowercutScheduleOb.InsertPowercutSchedule(mcode,description,area,date,time);
 		 return output; 
@@ -51,6 +52,7 @@ public class PowercutScheduleService {
 	 @Produces(MediaType.TEXT_PLAIN)
 	 public String updatePowercutSchedule(String updatePowercutSchedule)
 	 {
+		
 		 
 		 JsonObject updateCons = new JsonParser().parse(updatePowercutSchedule).getAsJsonObject();
 		 
@@ -72,6 +74,7 @@ public class PowercutScheduleService {
 	 @Produces(MediaType.TEXT_PLAIN)
 	 public String deletePowercutSchedule(String PowercutSchedule)
 	
+	 
 	 {
 		 JsonObject updateCons = new JsonParser().parse(PowercutSchedule).getAsJsonObject();
 	
