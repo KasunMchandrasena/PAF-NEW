@@ -56,7 +56,7 @@ public String InsertPowercutSchedule(String mcode, String description, String ar
 	
 	catch (Exception e) {
 		
-		 output = "Error while inserting the Power Consumption."; 
+		 output = "Error while inserting the Power Cut Schedule."; 
 		 System.err.println(e.getMessage()); 
 	}
 	
