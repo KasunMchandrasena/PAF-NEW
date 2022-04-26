@@ -3,7 +3,8 @@ package com;
 //For REST Service
 import javax.ws.rs.*; 
 import javax.ws.rs.core.MediaType;
-
+import javax.ws.rs.PUT;
+import javax.ws.rs.DELETE;
 
 //For JSON
 import com.google.gson.*; 
@@ -53,10 +54,10 @@ public class ComplaintService {
 	 @Path("/")
 	 @Consumes(MediaType.APPLICATION_JSON)
 	 @Produces(MediaType.TEXT_PLAIN)
-	 public String updateComplaint(String updateComplaintData)
+	 public String updateComplaint(String ComplaintData)
 	 {
 		 
-		 JsonObject updateCons = new JsonParser().parse(updateComplaintData).getAsJsonObject();
+		 JsonObject updateCons = new JsonParser().parse(ComplaintData).getAsJsonObject();
 		 
 		 String complaintCategory = updateCons.get("complaintCategory").getAsString();
 		 String complaintType = updateCons.get("complaintType").getAsString();
@@ -68,6 +69,22 @@ public class ComplaintService {
 		 
 		 String output = ComplaintOb.updateComplaint(complaintCategory,complaintType,accountNo,name,mobileno,address,complaintDesc);
 		 return output;
+	 }
+	 
+	 @DELETE
+	 @Path("/")
+	 @Consumes(MediaType.APPLICATION_JSON)
+	 @Produces(MediaType.TEXT_PLAIN)
+	 public String deleteComplaint(String ComplaintData)
+	
+	 {
+		 JsonObject updateCons = new JsonParser().parse(ComplaintData).getAsJsonObject();
+	
+		 String accountNo = updateCons.get("accountNo").getAsString();
+	
+		 String output = ComplaintOb.deleteComplaint(accountNo);
+		 return output;
+
 	 }
 
 }
