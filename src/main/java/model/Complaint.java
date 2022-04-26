@@ -47,7 +47,6 @@ public class Complaint {
 		
 			 
 			// execute the statement
-			 
 			 preparedStmt.execute(); 
 			 con.close(); 
 			 output = "Inserted successfully"; 
@@ -111,7 +110,7 @@ public class Complaint {
 				
 			 }
 			 con.close(); 
-			 // Complete the html table
+			 // Complete  html table
 			 output += "</table>";
 		}
 		catch(Exception e)
