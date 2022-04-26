@@ -119,7 +119,6 @@ public class Complaint {
 			 output = "Error while reading the customer."; 
 			 System.err.println(e.getMessage()); 
 		}
-		
 		return output;
 		}
 	
@@ -139,7 +138,6 @@ public class Complaint {
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			
 			 // binding values
-			  
 			 preparedStmt.setString(1, complaintCategory); 
 			 preparedStmt.setString(2, complaintType); 
 			 preparedStmt.setString(3, name);
@@ -149,17 +147,14 @@ public class Complaint {
 			 preparedStmt.setString(7, accountNo);
 			 
 			// execute the statement
-			 
 			 preparedStmt.execute(); 
 			 con.close(); 
 			 output = "Updated successful"; 
 		}
-		
 		catch (Exception e) {
 			 output = "Error while Update the complaint."; 
 			 System.err.println(e.getMessage()); 
 		}
-		
 		return output;
 	}
 		
