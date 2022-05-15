@@ -2,7 +2,7 @@ package model;
 
 import java.sql.*;  
 
-public class PowercutSchedule {
+public class NewConnection {
 	private Connection connect()
 	{
 		Connection con = null;
@@ -21,7 +21,7 @@ public class PowercutSchedule {
 	}	
 
 	//column name
-public String InsertPowercutSchedule(String mcode, String description, String area, String date, String time) {
+public String insertNewConnection(String nic, String name, String number, String address) {
  
 	String output = "";
 	try {
@@ -33,17 +33,17 @@ public String InsertPowercutSchedule(String mcode, String description, String ar
 		// create a prepared statement
 		//column name
 		
-		String query = "  insert into powercutschedule (`mcode`,`description`,`area`,`date`,`time`)" + " values (?, ?, ?, ?, ?)";
+		String query = "  insert into newconnection(`id`,`nic`,`name`,`number`,`address`)" + " values (?, ?, ?, ?, ?)";
 		
 		PreparedStatement preparedStmt = con.prepareStatement(query);
 		
 		 // binding values
 		
-		 preparedStmt.setString(1, mcode);
-		 preparedStmt.setString(2, description);
-		 preparedStmt.setString(3, area); 
-		 preparedStmt.setString(4, date); 
-		 preparedStmt.setString(5, time);
+		 preparedStmt.setInt(1, 0);
+		 preparedStmt.setString(2, nic);
+		 preparedStmt.setString(3, name); 
+		 preparedStmt.setString(4, number); 
+		 preparedStmt.setString(5, address);
 
 	
 		 
@@ -56,14 +56,14 @@ public String InsertPowercutSchedule(String mcode, String description, String ar
 	
 	catch (Exception e) {
 		
-		 output = "Error while inserting the Power Cut Schedule."; 
+		 output = "Error while inserting ."; 
 		 System.err.println(e.getMessage()); 
 	}
 	
 	return output;
 	}
 
-public String readPowercutSchedule() {
+public String readNewConnection() {
 	
 	String output = "";
 	
@@ -78,35 +78,42 @@ public String readPowercutSchedule() {
 		 // Prepare the html table to be displayed
 		 output = "<table border='1'>"
 		 		+ "<tr>"
-		 		+ "<th>MCode</th>"
-		 		+ "<th>Description</th>" +
-		 		  "<th>Area</th>" + 
-		 		  "<th>Date</th>" +
-		 		 "<th>Time</th></tr>";
-		 		
+		 		+ "<th>id</th>"
+		 		+ "<th>nic</th>" 
+		 		+  "<th>name</th>" 
+		 		+  "<th>number</th>" 
+		 		+ "<th>address</th>"
+		 		+ "<th>Update</th><th>Remove</th></tr>";
+				
 		 
-		 String query = "select * from powercutschedule"; 
+		 String query = "select * from newconnection"; 
 		 Statement stmt = con.createStatement(); 
 		 ResultSet rs = stmt.executeQuery(query); 
 		 
 		 while(rs.next()) {
 			 
-			 String mcode = rs.getString("mcode");
-			 String description = rs.getString("description"); 
-			 String area = rs.getString("area"); 
-			 String date = rs.getString("date"); 
-			 String time = rs.getString("time"); 
+			 String id = Integer.toString(rs.getInt("id"));
+			 String nic = rs.getString("nic"); 
+			 String name = rs.getString("name"); 
+			 String number = rs.getString("number"); 
+			 String address = rs.getString("address"); 
 	
 			 
 			 // Add into the HTML table
-			 output += "<tr><td>" + mcode + "</td>"; 
-			 output += "<td>" + description + "</td>";
-			 output += "<td>" + area + "</td>"; 
-			 output += "<td>" + date + "</td>"; 
-			 output += "<td>" + time + "</td>";
+			 output += "<tr><td>" + id + "</td>"; 
+			 output += "<td>" + nic + "</td>";
+			 output += "<td>" + name + "</td>"; 
+			 output += "<td>" + number + "</td>"; 
+			 output += "<td>" + address + "</td>";
 			 
 			 
 			 // buttons
+			 output += "<td><form method='post' action='updateNewConnection.jsp'>"
+				 		+ "<input name='btnUpdate' type='submit' value='Update'class='btn btn-secondary'>"
+				 		+ "<input name='Id' type='hidden' value='" + id + "'>" + "</form></td>"
+						 + "<td><form method='post' action='viewNewConnection.jsp'>"
+						 + "<input name='btnRemove' type='submit' value='Remove'class='btn btn-danger'>"
+						 + "<input name='id' type='hidden' value='" + id + "'>" + "</form></td></tr>";
 			
 		 }
 		 
@@ -126,7 +133,7 @@ public String readPowercutSchedule() {
 	}
 
 
-public String updatePowercutSchedule(String mcode,String description, String area, String date, String time) {
+public String updateNewConnection(String id,String nic, String name, String number, String address) {
 	
 	String output = "";
 	
@@ -137,28 +144,29 @@ public String updatePowercutSchedule(String mcode,String description, String are
 		{return  "Error while connecting to the database for updating.";}
 		
 		// create a prepared statement
-		String query = "  UPDATE powercutschedule SET description=?,area=?,date=?,time=? where mcode=?"  ;
+		String query = "  update newconnection SET address=?,number=?,name=?,nic=? where id=?"  ;
 		
 		PreparedStatement preparedStmt = con.prepareStatement(query);
 		
 		 // binding values
 		  
-		 preparedStmt.setString(1, description); 
-		 preparedStmt.setString(2, area); 
-		 preparedStmt.setString(3, date);
-		 preparedStmt.setString(4, time);
-		 preparedStmt.setString(5, mcode);
+		  
+		 preparedStmt.setString(1, nic); 
+		 preparedStmt.setString(2, name);
+		 preparedStmt.setString(3, number);
+		 preparedStmt.setString(4, address);
+		 preparedStmt.setInt(5, Integer.parseInt(id));
 		 
 		 
 		// execute the statement
 		 
 		 preparedStmt.execute(); 
 		 con.close(); 
-		 output = "Updated successfully"; 
+		 output = "Update successfully"; 
 	}
 	
 	catch (Exception e) {
-		 output = "Error while Update the Power cut Schedule."; 
+		 output = "Error while Update connection Details."; 
 		 System.err.println(e.getMessage()); 
 	}
 	
@@ -167,7 +175,7 @@ public String updatePowercutSchedule(String mcode,String description, String are
 
 
 //Delete
-public String deletePowercutSchedule(String mcode) {
+public String deleteNewConnection(String id) {
 	String output = "";
 	
 	try {
@@ -177,12 +185,12 @@ public String deletePowercutSchedule(String mcode) {
 		{return "Error while connecting to the database for deleting."; }
 		
 		//create a prepared statement
-		String query = "delete from powercutschedule where mcode=?";
+		String query = "delete from newconnection where id=?";
 		
 		PreparedStatement preparedStmt = con.prepareStatement(query);
 		
 		//binding values
-		preparedStmt.setString(1,mcode);
+		preparedStmt.setString(1,id);
 		
 		//execute the statement
 		preparedStmt.execute();
@@ -194,7 +202,7 @@ public String deletePowercutSchedule(String mcode) {
 	catch (Exception e)
 		{
 		
-		output = "Error while deleting the Power cut schedule.";
+		output = "Error while deleting the connection .";
 		System.err.println(e.getMessage());
 		
 		}
